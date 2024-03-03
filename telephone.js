@@ -7,6 +7,7 @@ class Telephone {
 
   addObserver(observer) {
     this.observers.push(observer)
+    // console.log(this.observers)
   }
 
   removeObserver(observer) {
@@ -15,7 +16,7 @@ class Telephone {
 
   notify(number) {
     this.observers.forEach(item => {
-      this.observers.update(number)
+      item.update(number)
     })
   }
 
@@ -28,10 +29,12 @@ class Telephone {
   }
 
   dialNumber(phoneNumber) {
-    this.phoneNumbers.includes(phoneNumber) ? 
-    console.log(`Dialing ${phoneNumber}`)
-    :
-    console.log(`Phone number not in Contacts`)
+    if (this.phoneNumbers.includes(phoneNumber)) {
+      // console.log(`Dialing ${phoneNumber}`)
+      this.notify(phoneNumber)
+    } else {
+      console.log(`Phone number not in Contacts`)
+    }
   }
 }
 
@@ -56,10 +59,10 @@ const observer2 = new DialingObserver();
 
 telephone.addObserver(observer1);
 telephone.addObserver(observer2);
+// telephone.removeObserver(observer2);
 
 telephone.addNumber("08148223650");
 telephone.addNumber("08123456789");
 
 telephone.dialNumber("08123456789");
-telephone.removeNumber("08123456789")
-telephone.dialNumber("08123456789");
+// telephone.removeNumber("08123456789")
